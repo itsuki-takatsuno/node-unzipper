@@ -1,7 +1,6 @@
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
-[![Test Coverage][travis-image]][travis-url]
-[![Coverage][coverage-image]][coverage-url]
+[![code coverage](https://zjonsson.github.io/node-unzipper/badge.svg)](https://zjonsson.github.io/node-unzipper/) 
 
 [npm-image]: https://img.shields.io/npm/v/unzipper.svg
 [npm-url]: https://npmjs.org/package/unzipper
