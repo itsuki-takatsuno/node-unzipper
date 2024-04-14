@@ -58,6 +58,6 @@
   ],
   "main": "unzip.js",
   "scripts": {
-    "test": "npx tap --coverage-report=html --allow-incomplete-coverage"
+    "test": "npx tap --coverage-report=lcov --coverage-report=html --allow-incomplete-coverage"
   }
 }
