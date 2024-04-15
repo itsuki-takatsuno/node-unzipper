@@ -2,3 +2,5 @@ test/
 testData/
 .nyc_output/
 coverage/
+.tap/
+.github/
