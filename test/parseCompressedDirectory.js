@@ -1,11 +1,9 @@
-'use strict';
-
-var test = require('tap').test;
-var fs = require('fs');
-var path = require('path');
-var temp = require('temp');
-var dirdiff = require('dirdiff');
-var unzip = require('../');
+const test = require('tap').test;
+const fs = require('fs');
+const path = require('path');
+const temp = require('temp');
+const dirdiff = require('dirdiff');
+const unzip = require('../');
 
 /*
 zipinfo testData/compressed-directory-entry/archive.zip | grep META-INF/
@@ -14,13 +12,13 @@ zipinfo testData/compressed-directory-entry/archive.zip | grep META-INF/
 ?rw-------  2.0 unx      244 b- defN 17-Sep-09 20:43 META-INF/container.xml
 */
 test("extract compressed archive w/ a compressed directory entry", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-directory-entry/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-directory-entry/archive.zip');
 
   temp.mkdir('node-unzip-', function (err, dirPath) {
     if (err) {
       throw err;
     }
-    var unzipExtractor = unzip.Extract({ path: dirPath });
+    const unzipExtractor = unzip.Extract({ path: dirPath });
     unzipExtractor.on('error', function(err) {
       throw err;
     });

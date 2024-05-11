@@ -1,16 +1,14 @@
-'use strict';
-
-var test = require('tap').test;
-var fs = require('fs');
-var path = require('path');
-var temp = require('temp');
-var dirdiff = require('dirdiff');
-var unzip = require('../');
+const test = require('tap').test;
+const fs = require('fs');
+const path = require('path');
+const temp = require('temp');
+const dirdiff = require('dirdiff');
+const unzip = require('../');
 
 test("parse archive w/ file size unknown flag set (created by OS X Finder)", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-OSX-Finder/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-OSX-Finder/archive.zip');
 
-  var unzipParser = unzip.Parse();
+  const unzipParser = unzip.Parse();
   fs.createReadStream(archive).pipe(unzipParser);
   unzipParser.on('error', function(err) {
     throw err;
@@ -20,13 +18,13 @@ test("parse archive w/ file size unknown flag set (created by OS X Finder)", fun
 });
 
 test("extract archive w/ file size unknown flag set (created by OS X Finder)", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-OSX-Finder/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-OSX-Finder/archive.zip');
 
   temp.mkdir('node-unzip-', function (err, dirPath) {
     if (err) {
       throw err;
     }
-    var unzipExtractor = unzip.Extract({ path: dirPath });
+    const unzipExtractor = unzip.Extract({ path: dirPath });
     unzipExtractor.on('error', function(err) {
       throw err;
     });
@@ -49,13 +47,13 @@ test("extract archive w/ file size unknown flag set (created by OS X Finder)", f
 });
 
 test("archive w/ language encoding flag set", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-flags-set/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-flags-set/archive.zip');
 
   temp.mkdir('node-unzip-', function (err, dirPath) {
     if (err) {
       throw err;
     }
-    var unzipExtractor = unzip.Extract({ path: dirPath });
+    const unzipExtractor = unzip.Extract({ path: dirPath });
     unzipExtractor.on('error', function(err) {
       throw err;
     });

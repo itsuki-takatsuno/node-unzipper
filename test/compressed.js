@@ -1,17 +1,15 @@
-'use strict';
-
-var test = require('tap').test;
-var fs = require('fs');
-var path = require('path');
-var temp = require('temp');
-var dirdiff = require('dirdiff');
-var unzip = require('../');
-var il = require('iconv-lite');
+const test = require('tap').test;
+const fs = require('fs');
+const path = require('path');
+const temp = require('temp');
+const dirdiff = require('dirdiff');
+const unzip = require('../');
+const il = require('iconv-lite');
 
 test("parse compressed archive (created by POSIX zip)", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
-  var unzipParser = unzip.Parse();
+  const unzipParser = unzip.Parse();
   fs.createReadStream(archive).pipe(unzipParser);
   unzipParser.on('error', function(err) {
     throw err;
@@ -21,12 +19,12 @@ test("parse compressed archive (created by POSIX zip)", function (t) {
 });
 
 test("parse compressed archive (created by DOS zip)", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-cp866/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-cp866/archive.zip');
 
-  var unzipParser = unzip.Parse();
+  const unzipParser = unzip.Parse();
   fs.createReadStream(archive).pipe(unzipParser);
   unzipParser.on('entry', function(entry) {
-    var fileName = entry.props.flags.isUnicode ? entry.path : il.decode(entry.props.pathBuffer, 'cp866');
+    const fileName = entry.props.flags.isUnicode ? entry.path : il.decode(entry.props.pathBuffer, 'cp866');
     t.equal(fileName, 'Тест.txt');
   });
   unzipParser.on('error', function(err) {
@@ -37,13 +35,13 @@ test("parse compressed archive (created by DOS zip)", function (t) {
 });
 
 test("extract compressed archive w/ file sizes known prior to zlib inflation (created by POSIX zip)", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
   temp.mkdir('node-unzip-', function (err, dirPath) {
     if (err) {
       throw err;
     }
-    var unzipExtractor = unzip.Extract({ path: dirPath });
+    const unzipExtractor = unzip.Extract({ path: dirPath });
     unzipExtractor.on('error', function(err) {
       throw err;
     });

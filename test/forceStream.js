@@ -1,20 +1,14 @@
-'use strict';
-
-var test = require('tap').test;
-var fs = require('fs');
-var path = require('path');
-var Stream = require('stream');
-var unzip = require('../');
-
-// Backwards compatibility for node versions < 8
-if (!Stream.Writable || !Stream.Writable.prototype.destroy)
-  Stream = require('readable-stream');
+const test = require('tap').test;
+const fs = require('fs');
+const path = require('path');
+const Stream = require('stream');
+const unzip = require('../');
 
 test("verify that setting the forceStream option emits a data event instead of entry", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
-  var dataEventEmitted = false;
-  var entryEventEmitted = false;
+  let dataEventEmitted = false;
+  let entryEventEmitted = false;
   fs.createReadStream(archive)
     .pipe(unzip.Parse({ forceStream: true }))
     .on('data', function(entry) {
@@ -24,7 +18,7 @@ test("verify that setting the forceStream option emits a data event instead of e
     .on('entry', function() {
       entryEventEmitted = true;
     })
-      .on('finish', function() {
+    .on('finish', function() {
       t.equal(dataEventEmitted, true);
       t.equal(entryEventEmitted, false);
       t.end();

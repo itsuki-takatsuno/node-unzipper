@@ -1,12 +1,10 @@
-'use strict';
-
-var test = require('tap').test;
-var fs = require('fs');
-var path = require('path');
-var unzip = require('../');
+const test = require('tap').test;
+const fs = require('fs');
+const path = require('path');
+const unzip = require('../');
 
 test("verify that immediate autodrain does not unzip", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
   fs.createReadStream(archive)
     .pipe(unzip.Parse())
@@ -22,7 +20,7 @@ test("verify that immediate autodrain does not unzip", function (t) {
 });
 
 test("verify that autodrain promise works", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
   fs.createReadStream(archive)
     .pipe(unzip.Parse())
@@ -34,16 +32,16 @@ test("verify that autodrain promise works", function (t) {
         });
     })
     .on('finish', function() {
-      console.log('end')
+      console.log('end');
       t.end();
     });
 });
 
 test("verify that autodrain resolves after it has finished", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
   fs.createReadStream(archive)
     .pipe(unzip.Parse())
     .on('entry', entry => entry.autodrain())
-    .on('end', () => t.end())
+    .on('end', () => t.end());
 });

@@ -30,8 +30,11 @@
     "graceful-fs": "^4.2.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.2.0",
     "aws-sdk": "^2.77.0",
     "dirdiff": ">= 0.0.1 < 1",
+    "eslint": "^9.2.0",
+    "globals": "^15.2.0",
     "iconv-lite": "^0.4.24",
     "request": "^2.88.0",
     "stream-buffers": ">= 0.2.5 < 1",

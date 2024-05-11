@@ -1,16 +1,14 @@
-'use strict';
+const test = require('tap').test;
+const fs = require('fs');
+const path = require('path');
+const temp = require('temp');
+const unzip = require('../');
 
-var test = require('tap').test;
-var fs = require('fs');
-var path = require('path');
-var temp = require('temp');
-var unzip = require('../');
-
-var archive = path.join(__dirname, '../package.json');
+const archive = path.join(__dirname, '../package.json');
 
 test('parse a file that is not an archive', function (t) {
 
-  var unzipParser = unzip.Parse();
+  const unzipParser = unzip.Parse();
   fs.createReadStream(archive).pipe(unzipParser);
   unzipParser.on('error', function(err) {
     t.ok(err.message.indexOf('invalid signature: 0x') !== -1);
@@ -28,7 +26,7 @@ test('extract a file that is not an archive', function (t) {
     if (err) {
       throw err;
     }
-    var unzipExtractor = unzip.Extract({ path: dirPath });
+    const unzipExtractor = unzip.Extract({ path: dirPath });
     unzipExtractor.on('error', function(err) {
       t.ok(err.message.indexOf('invalid signature: 0x') !== -1);
       t.end();

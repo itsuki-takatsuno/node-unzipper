@@ -1,26 +1,24 @@
-'use strict';
-
-var test = require('tap').test;
-var fs = require('fs');
-var os = require('os');
-var path = require('path');
-var temp = require('temp');
-var unzip = require('../');
-var Stream = require('stream');
+const test = require('tap').test;
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const temp = require('temp');
+const unzip = require('../');
+const Stream = require('stream');
 
 
 test("Only emit finish/close when extraction has completed", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
-  temp.mkdir('node-unzip-finish-', function (err, dirPath) {
+  temp.mkdir('node-unzip-finish-', function (err) {
     if (err) {
       throw err;
     }
 
-    var filesDone = 0;
+    let filesDone = 0;
 
     function getWriter() {
-      var delayStream = new Stream.Transform();
+      const delayStream = new Stream.Transform();
 
       delayStream._transform = function(d, e, cb) {
         setTimeout(cb, 500);
@@ -36,12 +34,12 @@ test("Only emit finish/close when extraction has completed", function (t) {
     }
 
 
-    var unzipExtractor = unzip.Extract({ getWriter: getWriter, path: os.tmpdir() });
+    const unzipExtractor = unzip.Extract({ getWriter: getWriter, path: os.tmpdir() });
     unzipExtractor.on('error', function(err) {
       throw err;
     });
     unzipExtractor.promise().then(function() {
-      t.same(filesDone,2);
+      t.same(filesDone, 2);
       t.end();
     });
 

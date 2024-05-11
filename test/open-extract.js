@@ -1,14 +1,12 @@
-'use strict';
-
-var test = require('tap').test;
-var path = require('path');
-var temp = require('temp');
-var dirdiff = require('dirdiff');
-var unzip = require('../');
+const test = require('tap').test;
+const path = require('path');
+const temp = require('temp');
+const dirdiff = require('dirdiff');
+const unzip = require('../');
 
 
 test("extract compressed archive with open.file.extract", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
   temp.mkdir('node-unzip-2', function (err, dirPath) {
     if (err) {
@@ -29,6 +27,5 @@ test("extract compressed archive with open.file.extract", function (t) {
           t.end();
         });
       });
-    
   });
 });

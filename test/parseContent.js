@@ -1,14 +1,10 @@
-'use strict';
-
-var test = require('tap').test;
-var fs = require('fs');
-var path = require('path');
-var temp = require('temp');
-var streamBuffers = require("stream-buffers");
-var unzip = require('../');
+const test = require('tap').test;
+const fs = require('fs');
+const path = require('path');
+const unzip = require('../');
 
 test("get content of a single file entry out of a zip", function (t) {
-  var archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
+  const archive = path.join(__dirname, '../testData/compressed-standard/archive.zip');
 
   fs.createReadStream(archive)
     .pipe(unzip.Parse())
@@ -18,7 +14,7 @@ test("get content of a single file entry out of a zip", function (t) {
 
       entry.buffer()
         .then(function(str) {
-          var fileStr = fs.readFileSync(path.join(__dirname, '../testData/compressed-standard/inflated/file.txt'), 'utf8');
+          const fileStr = fs.readFileSync(path.join(__dirname, '../testData/compressed-standard/inflated/file.txt'), 'utf8');
           t.equal(str.toString(), fileStr);
           t.end();
         });
