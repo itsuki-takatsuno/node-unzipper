@@ -23,7 +23,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "big-integer": "^1.6.17",
     "bluebird": "~3.4.1",
     "duplexer2": "~0.1.4",
     "fstream": "^1.0.12",
