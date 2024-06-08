@@ -1,5 +1,5 @@
 const test = require('tap').test;
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const temp = require('temp');
 const dirdiff = require('dirdiff');
@@ -49,7 +49,14 @@ test("extract compressed archive w/ file sizes known prior to zlib inflation (cr
 
     fs.createReadStream(archive).pipe(unzipExtractor);
 
-    function testExtractionResults() {
+    async function testExtractionResults() {
+      const root = path.resolve(__dirname, '../testData/compressed-standard/inflated');
+
+      // since empty directories can not be checked into git we have to
+      // create them
+      await fs.ensureDir(path.resolve(root, 'emptydir'));
+      await fs.ensureDir(path.resolve(root, 'emptyroot/emptydir'));
+
       dirdiff(path.join(__dirname, '../testData/compressed-standard/inflated'), dirPath, {
         fileContents: true
       }, function (err, diffs) {

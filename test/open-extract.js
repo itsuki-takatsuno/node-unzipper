@@ -3,6 +3,7 @@ const path = require('path');
 const temp = require('temp');
 const dirdiff = require('dirdiff');
 const unzip = require('../');
+const fs = require('fs-extra');
 
 
 test("extract compressed archive with open.file.extract", function (t) {
@@ -16,7 +17,14 @@ test("extract compressed archive with open.file.extract", function (t) {
       .then(function(d) {
         return d.extract({path: dirPath});
       })
-      .then(function() {
+      .then(async function() {
+        const root = path.resolve(__dirname, '../testData/compressed-standard/inflated');
+
+        // since empty directories can not be checked into git we have to
+        // create them
+        await fs.ensureDir(path.resolve(root, 'emptydir'));
+        await fs.ensureDir(path.resolve(root, 'emptyroot/emptydir'));
+
         dirdiff(path.join(__dirname, '../testData/compressed-standard/inflated'), dirPath, {
           fileContents: true
         }, function (err, diffs) {
