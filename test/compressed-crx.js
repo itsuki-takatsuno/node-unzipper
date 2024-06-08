@@ -22,7 +22,7 @@ test('parse/extract crx archive', function (t) {
 
     function testExtractionResults() {
       t.same(unzipExtractor.crxHeader.version, 2);
-      dirdiff(path.join(__dirname, '../testData/compressed-standard/inflated'), dirPath, {
+      dirdiff(path.join(__dirname, '../testData/compressed-standard-crx/inflated'), dirPath, {
         fileContents: true
       }, function (err, diffs) {
         if (err) {

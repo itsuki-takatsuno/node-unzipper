@@ -32,7 +32,6 @@ test("verify that autodrain promise works", function (t) {
         });
     })
     .on('finish', function() {
-      console.log('end');
       t.end();
     });
 });
