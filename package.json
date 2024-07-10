@@ -42,9 +42,6 @@
     "tap": "^16.3.10",
     "temp": ">= 0.4.0 < 1"
   },
-  "peerDependencies": {
-    "@aws-sdk/client-s3": "^3.0.0"
-  },
   "directories": {
     "example": "examples",
     "test": "test"
@@ -60,6 +57,6 @@
   ],
   "main": "unzip.js",
   "scripts": {
-    "test": "npx tap@^16.3.10 test/*.js --no-coverage --reporter=dot"
+    "test": "npx tap test/*.js --coverage-report=html --lines=90 --functions=85 --statements=90 --branches=80 --reporter=dot"
   }
 }
