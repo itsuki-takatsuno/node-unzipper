@@ -32,13 +32,14 @@
   "devDependencies": {
     "@eslint/js": "^9.2.0",
     "aws-sdk": "^2.1636.0",
+    "@aws-sdk/client-s3": "^3.0.0",
     "dirdiff": ">= 0.0.1 < 1",
     "eslint": "^9.2.0",
     "globals": "^15.2.0",
     "iconv-lite": "^0.4.24",
     "request": "^2.88.0",
     "stream-buffers": ">= 0.2.5 < 1",
-    "tap": "^12.7.0",
+    "tap": "^16.3.10",
     "temp": ">= 0.4.0 < 1"
   },
   "directories": {
@@ -56,6 +57,6 @@
   ],
   "main": "unzip.js",
   "scripts": {
-    "test": "npx tap test/*.js --coverage-report=html --reporter=dot"
+    "test": "npx tap test/*.js --coverage-report=html --lines=90 --functions=85 --statements=90 --branches=80 --reporter=dot"
   }
 }
